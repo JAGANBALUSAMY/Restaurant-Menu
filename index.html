@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Menu</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <a href="#" id="homeIcon">
+          <img src="https://via.placeholder.com/30" alt="Home Icon" class="home-icon"> Restaurant Name
+        </a>
+      </div>
+      <div class="search-container">
+        <input type="text" id="searchBar" placeholder="Search for dishes...">
+      </div>
+      <div class="action-icons">
+        <button type="button" id="viewWishlist"><i class="fas fa-heart"></i> View Wishlist</button>
+        <button type="button" id="viewCart"><i class="fas fa-shopping-cart"></i> View Cart</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filter Section -->
+  <section class="filters">
+    <button type="button" class="filter-btn" data-filter="all">All</button>
+    <button type="button" class="filter-btn" data-filter="vegetarian">Vegetarian</button>
+    <button type="button" class="filter-btn" data-filter="gluten-free">Gluten-Free</button>
+    <button type="button" class="filter-btn" data-filter="spicy">Spicy</button>
+    <button type="button" class="filter-btn" data-filter="seafood">Seafood</button>
+    <button type="button" class="filter-btn" data-filter="dairy-free">Dairy-Free</button>
+  </section>
+
+  <main>
+    <!-- Generate 15 Categories Dynamically -->
+    <div id="menu">
+      <script>
+        const categories = ["Appetizers", "Soups", "Salads", "Main Courses", "Pasta", "Pizza", "Seafood", "Grilled", "Vegetarian", "Desserts", "Beverages", "Kids Menu", "Breakfast", "Specials", "Sides"];
+        const categoryDescriptions = [
+          "Start your meal with our delicious appetizers.",
+          "Warm and comforting soups for every taste.",
+          "Fresh and healthy salads to refresh your palate.",
+          "Hearty and satisfying main courses.",
+          "Delicious pasta dishes made with fresh ingredients.",
+          "Crispy and cheesy pizzas for every craving.",
+          "Fresh seafood cooked to perfection.",
+          "Perfectly grilled dishes with bold flavors.",
+          "Tasty vegetarian options for everyone.",
+          "Sweet and indulgent desserts to end your meal.",
+          "Refreshing beverages to pair with your meal.",
+          "Specially crafted dishes for kids.",
+          "Start your day with our delightful breakfast options.",
+          "Exclusive specials for a unique dining experience.",
+          "Perfect sides to complement your meal."
+        ];
+        const imageUrls = [
+          "https://via.placeholder.com/150"
+        ];
+        const prices = [
+          5.99, 6.99, 7.99, 8.99, 9.99, 10.99, 11.99, 12.99, 13.99, 14.99, 15.99,
+          16.99, 17.99, 18.99, 19.99
+        ];
+        const dishNames = [
+          "Dish", "Dish 2", "Dish 3", "Dish 4", "Dish 5","Dish 6", "Dish 7", "Dish 8", "Dish 9", "Dish 10","Dish 11", "Dish 12", "Dish 13", "Dish 14", "Dish 15"
+        ];
+        const filterMapping = [
+          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
+          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
+          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
+          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
+          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
+          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
+          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
+          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
+          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
+          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
+          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
+          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
+          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
+          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
+          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"]
+        ];
+        const dishesPerCategory = [10, 12, 11, 15, 13, 14, 10, 12, 11, 13, 14, 10, 12, 11, 10];
+        let imageCounter = 0 , cd = -1;
+
+        const dishes = categories.map((category, i) => {
+          cd++;
+          return `
+            <section class="menu-category" id="category-${i + 1}">
+              <h2>${category}</h2>
+              <div class="menu-items">
+                ${Array.from({ length: dishesPerCategory[i] }, (_, dishIndex) => {
+                  const imageUrl = imageUrls[imageCounter];
+                  const price = prices[(imageCounter + dishIndex) % prices.length];
+                  const filters = filterMapping[i % filterMapping.length];
+                  const filterClass = filters[dishIndex % filters.length];
+                  const dishName = dishNames[0];
+                  return `
+                    <div class="menu-item" data-type="${filterClass}" data-id="${i}-${dishIndex}">                      <img src="${imageUrl}" alt="Dish ${dishIndex + 1}">
+                      <div class="item-description">
+                        <h3>${category} - ${dishName} ${dishIndex} - <span class="price">$${price.toFixed(2)}</span></h3>
+                        <p>${categoryDescriptions[cd]}</p>
+                        <button type="button" class="add-to-wishlist"><i class="fas fa-heart"></i>&#10084;</button>
+                        <button type="button" class="add-to-cart">Add to Cart</button>
+                      </div>
+                    </div>`;
+                    
+                }).join('')}
+              </div>
+            </section>`;
+        });
+
+        document.getElementById('menu').innerHTML = dishes.join('');
+      </script>
+    </div>
+  </main>
+
+  <!-- Wishlist Modal -->
+  <div id="wishlist-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeWishlist">×</span>
+      <h2>Wishlist</h2>
+      <ul id="wishlist-items"></ul>
+    </div>
+  </div>
+
+  <!-- Cart Modal -->
+  <div id="cart-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeCart">×</span>
+      <h2>Cart</h2>
+      <ul id="cart-items"></ul>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>© 2024 Restaurant Name | All Rights Reserved</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
