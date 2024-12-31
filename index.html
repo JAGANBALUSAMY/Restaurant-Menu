@@ -90,7 +90,6 @@
         let imageCounter = 0 , cd = -1;
 
         const dishes = categories.map((category, i) => {
-          cd++;
           return `
             <section class="menu-category" id="category-${i + 1}">
               <h2>${category}</h2>
@@ -101,6 +100,7 @@
                   const filters = filterMapping[i % filterMapping.length];
                   const filterClass = filters[dishIndex % filters.length];
                   const dishName = dishNames[0];
+                  cd++;
                   return `
                     <div class="menu-item" data-type="${filterClass}" data-id="${i}-${dishIndex}">                      <img src="${imageUrl}" alt="Dish ${dishIndex + 1}">
                       <div class="item-description">
