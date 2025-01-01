@@ -43,32 +43,43 @@
       <script>
         const categories = ["Appetizers", "Soups", "Salads", "Main Courses", "Pasta", "Pizza", "Seafood", "Grilled", "Vegetarian", "Desserts", "Beverages", "Kids Menu", "Breakfast", "Specials", "Sides"];
         const categoryDescriptions = [
-          "Start your meal with our delicious appetizers.",
-          "Warm and comforting soups for every taste.",
-          "Fresh and healthy salads to refresh your palate.",
-          "Hearty and satisfying main courses.",
-          "Delicious pasta dishes made with fresh ingredients.",
-          "Crispy and cheesy pizzas for every craving.",
-          "Fresh seafood cooked to perfection.",
-          "Perfectly grilled dishes with bold flavors.",
-          "Tasty vegetarian options for everyone.",
-          "Sweet and indulgent desserts to end your meal.",
-          "Refreshing beverages to pair with your meal.",
-          "Specially crafted dishes for kids.",
-          "Start your day with our delightful breakfast options.",
-          "Exclusive specials for a unique dining experience.",
-          "Perfect sides to complement your meal."
-        ];
-        const imageUrls = [
-          "https://via.placeholder.com/150"
-        ];
-        const prices = [
-          5.99, 6.99, 7.99, 8.99, 9.99, 10.99, 11.99, 12.99, 13.99, 14.99, 15.99,
-          16.99, 17.99, 18.99, 19.99
-        ];
+  ...(() => {
+    const descriptions = [];
+    for (let i = 0; i < 150; i++) {
+      descriptions.push("Descriptions "+i);
+    }
+    return descriptions;
+  })()
+];
+
+const imageUrls = [
+  ...(() => {
+    const urls = [];
+    for (let i = 0; i < 150; i++) {
+      urls.push("https://via.placeholder.com/150"); // Constant URL for each item
+    }
+    return urls;
+  })()
+];
+
+const pricesList = [
+  ...(() => {
+    const prices = [];
+    for (let i = 0; i < 150; i++) {
+      prices.push(5.99); // Constant price for each item
+    }
+    return prices;
+  })()
+];
         const dishNames = [
-          "Dish", "Dish 2", "Dish 3", "Dish 4", "Dish 5","Dish 6", "Dish 7", "Dish 8", "Dish 9", "Dish 10","Dish 11", "Dish 12", "Dish 13", "Dish 14", "Dish 15"
-        ];
+    ...(() => {
+        const dishes = [];
+        for (let i = 1; i <= 150; i++) {
+            dishes.push(`Dish ${i}`);
+        }
+        return dishes;
+    })()
+];
         const filterMapping = [
           ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
           ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
@@ -86,35 +97,38 @@
           ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
           ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"]
         ];
-        const dishesPerCategory = [10, 12, 11, 15, 13, 14, 10, 12, 11, 13, 14, 10, 12, 11, 10];
-        let imageCounter = 0 , cd = -1;
+        const dishesPerCategory = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
+        let constant = -1 , constants = 0;
 
         const dishes = categories.map((category, i) => {
+  return `
+    <section class="menu-category" id="category-${i + 1}">
+      <h2>${category}</h2>
+      <div class="menu-items">
+        ${Array.from({ length: dishesPerCategory[i] }, (_, dishIndex) => {
+          const imageUrl = imageUrls[i * 10 + dishIndex]; // Access the correct URL index
+          const price = pricesList[i * 10 + dishIndex]; // Access the correct price index
+          const filter = filterMapping[i][dishIndex]; // Get the filter from filterMapping
+          const dishName = dishNames[i * 10 + dishIndex]; // Correctly access the dish name
+          const categoryDescription = categoryDescriptions[i * 10 + dishIndex]; // Correctly access the description
+
           return `
-            <section class="menu-category" id="category-${i + 1}">
-              <h2>${category}</h2>
-              <div class="menu-items">
-                ${Array.from({ length: dishesPerCategory[i] }, (_, dishIndex) => {
-                  const imageUrl = imageUrls[imageCounter];
-                  const price = prices[(imageCounter + dishIndex) % prices.length];
-                  const filters = filterMapping[i % filterMapping.length];
-                  const filterClass = filters[dishIndex % filters.length];
-                  const dishName = dishNames[0];
-                  cd++;
-                  return `
-                    <div class="menu-item" data-type="${filterClass}" data-id="${i}-${dishIndex}">                      <img src="${imageUrl}" alt="Dish ${dishIndex + 1}">
-                      <div class="item-description">
-                        <h3>${category} - ${dishName} ${dishIndex} - <span class="price">$${price.toFixed(2)}</span></h3>
-                        <p>${categoryDescriptions[cd]}</p>
-                        <button type="button" class="add-to-wishlist"><i class="fas fa-heart"></i>&#10084;</button>
-                        <button type="button" class="add-to-cart">Add to Cart</button>
-                      </div>
-                    </div>`;
-                    
-                }).join('')}
+            <div class="menu-item" data-type="${filter}" data-id="${i}-${dishIndex}">
+              <img src="${imageUrl}" alt="Dish ${dishIndex + 1}">
+              <div class="item-description">
+                <h3>${category} - ${dishName} - <span class="price">$${price.toFixed(2)}</span></h3>
+                <p>${categoryDescription}</p>
+                <button type="button" class="add-to-wishlist"><i class="fas fa-heart"></i>&#10084;</button>
+                <button type="button" class="add-to-cart">Add to Cart</button>
               </div>
-            </section>`;
-        });
+            </div>`;
+        }).join('')}
+      </div>
+    </section>`;
+});
+
+document.getElementById('menu').innerHTML = dishes.join('');
+
 
         document.getElementById('menu').innerHTML = dishes.join('');
       </script>
