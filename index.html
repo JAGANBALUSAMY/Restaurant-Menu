@@ -21,7 +21,7 @@
         <input type="text" id="searchBar" placeholder="Search for dishes...">
       </div>
       <div class="action-icons">
-        <button type="button" id="viewWishlist"><i class="fas fa-heart"></i>&#10084;</button>
+        <button type="button" id="viewWishlist"><i class="fas fa-heart"></i> View Wishlist</button>
         <button type="button" id="viewCart"><i class="fas fa-shopping-cart"></i> View Cart</button>
       </div>
     </div>
@@ -29,106 +29,69 @@
 
   <!-- Filter Section -->
   <section class="filters">
-    <button type="button" class="filter-btn" data-filter="all">All</button>
+    <button type="button" class="filter-btn" data-filter="maincourses">Main Courses</button>
     <button type="button" class="filter-btn" data-filter="vegetarian">Vegetarian</button>
-    <button type="button" class="filter-btn" data-filter="gluten-free">Gluten-Free</button>
-    <button type="button" class="filter-btn" data-filter="spicy">Spicy</button>
+    <button type="button" class="filter-btn" data-filter="appetizers">Appetizers</button>
+    <button type="button" class="filter-btn" data-filter="soups">Soups</button>
+    <button type="button" class="filter-btn" data-filter="salads">Salads</button>
+    <button type="button" class="filter-btn" data-filter="desserts">Desserts</button>
+    <button type="button" class="filter-btn" data-filter="pasta">Pasta</button>
+    <button type="button" class="filter-btn" data-filter="pizza">Pizza</button>
     <button type="button" class="filter-btn" data-filter="seafood">Seafood</button>
-    <button type="button" class="filter-btn" data-filter="dairy-free">Dairy-Free</button>
+    <button type="button" class="filter-btn" data-filter="grilled">Grilled</button>
+    <button type="button" class="filter-btn" data-filter="beverages">Beverages</button>
+    <button type="button" class="filter-btn" data-filter="kidsmenu">Kids Menu</button>
+    <button type="button" class="filter-btn" data-filter="breakfast">Breakfast</button>
+    <button type="button" class="filter-btn" data-filter="specials">Specials</button>
+    <button type="button" class="filter-btn" data-filter="sides">Sides</button>
+    <button type="button" class="filter-btn" data-filter="all">All</button>
   </section>
 
   <main>
-    <!-- Generate 15 Categories Dynamically -->
+    <!-- Menu Section -->
     <div id="menu">
       <script>
-        const categories = ["Appetizers", "Soups", "Salads", "Main Courses", "Pasta", "Pizza", "Seafood", "Grilled", "Vegetarian", "Desserts", "Beverages", "Kids Menu", "Breakfast", "Specials", "Sides"];
-        const categoryDescriptions = [
-  ...(() => {
-    const descriptions = [];
-    for (let i = 0; i < 150; i++) {
-      descriptions.push("Descriptions "+i);
-    }
-    return descriptions;
-  })()
-];
-
-const imageUrls = [
-  ...(() => {
-    const urls = [];
-    for (let i = 0; i < 150; i++) {
-      urls.push("https://via.placeholder.com/150"); // Constant URL for each item
-    }
-    return urls;
-  })()
-];
-
-const pricesList = [
-  ...(() => {
-    const prices = [];
-    for (let i = 0; i < 150; i++) {
-      prices.push(5.99); // Constant price for each item
-    }
-    return prices;
-  })()
-];
-        const dishNames = [
-    ...(() => {
-        const dishes = [];
-        for (let i = 1; i <= 150; i++) {
-            dishes.push(`Dish ${i}`);
-        }
-        return dishes;
-    })()
-];
-        const filterMapping = [
-          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
-          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
-          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
-          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
-          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
-          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
-          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
-          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
-          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
-          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
-          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
-          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
-          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
-          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"],
-          ["vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free", "vegetarian", "gluten-free", "spicy", "seafood", "dairy-free"]
+        const categories = [
+          "Main Courses", "Vegetarian", "Appetizers", "Soups", "Salads",
+          "Desserts", "Pasta", "Pizza", "Seafood", "Grilled",
+          "Beverages", "Kids Menu", "Breakfast", "Specials", "Sides"
+        ];
+        const categoryDescriptions = Array.from({ length: 150 }, (_, i) => `Description ${i + 1}`);
+        const imageUrls = Array.from({ length: 150 }, () => "https://via.placeholder.com/150");
+        const pricesList = Array.from({ length: 150 }, () => 5.99);
+        const dishNames = Array.from({ length: 150 }, (_, i) => `Dish ${i + 1}`);
+        const filter = [
+          "maincourses", "vegetarian", "appetizers", "soups", "salads",
+          "desserts", "pasta", "pizza", "seafood", "grilled",
+          "beverages", "kidsmenu", "breakfast", "specials", "sides"
         ];
         const dishesPerCategory = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
-        let constant = -1 , constants = 0;
 
         const dishes = categories.map((category, i) => {
-  return `
-    <section class="menu-category" id="category-${i + 1}">
-      <h2>${category}</h2>
-      <div class="menu-items">
-        ${Array.from({ length: dishesPerCategory[i] }, (_, dishIndex) => {
-          const imageUrl = imageUrls[i * 10 + dishIndex]; // Access the correct URL index
-          const price = pricesList[i * 10 + dishIndex]; // Access the correct price index
-          const filter = filterMapping[i][dishIndex]; // Get the filter from filterMapping
-          const dishName = dishNames[i * 10 + dishIndex]; // Correctly access the dish name
-          const categoryDescription = categoryDescriptions[i * 10 + dishIndex]; // Correctly access the description
-
           return `
-            <div class="menu-item" data-type="${filter}" data-id="${i}-${dishIndex}">
-              <img src="${imageUrl}" alt="Dish ${dishIndex + 1}">
-              <div class="item-description">
-                <h3>${category} - ${dishName} - <span class="price">$${price.toFixed(2)}</span></h3>
-                <p>${categoryDescription}</p>
-                <button type="button" class="add-to-wishlist"><i class="fas fa-heart"></i>&#10084;</button>
-                <button type="button" class="add-to-cart">Add to Cart</button>
+            <section class="menu-category" id="category-${i + 1}">
+              <h2>${category}</h2>
+              <div class="menu-items">
+                ${Array.from({ length: dishesPerCategory[i] }, (_, dishIndex) => {
+                  const imageUrl = imageUrls[i * 10 + dishIndex];
+                  const price = pricesList[i * 10 + dishIndex];
+                  const dishName = dishNames[i * 10 + dishIndex];
+                  const categoryDescription = categoryDescriptions[i * 10 + dishIndex];
+
+                  return `
+                    <div class="menu-item" data-type="${filter[i]}" data-id="${i}-${dishIndex}">
+                      <img src="${imageUrl}" alt="${dishName}">
+                      <div class="item-description">
+                        <h3>${dishName} - <span class="price">$${price.toFixed(2)}</span></h3>
+                        <p>${categoryDescription}</p>
+                        <button type="button" class="add-to-wishlist"><i class="fas fa-heart"></i> &#10084;</button>
+                        <button type="button" class="add-to-cart">Add to Cart</button>
+                      </div>
+                    </div>`;
+                }).join('')}
               </div>
-            </div>`;
-        }).join('')}
-      </div>
-    </section>`;
-});
-
-document.getElementById('menu').innerHTML = dishes.join('');
-
+            </section>`;
+        });
 
         document.getElementById('menu').innerHTML = dishes.join('');
       </script>
