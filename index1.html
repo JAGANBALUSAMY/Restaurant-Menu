@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Menu</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <a href="#" id="homeIcon">
+          <img src="images/home.png" alt="Home Icon" class="home-icon">Cuisine Fusion
+        </a>
+      </div>
+      <div class="search-container">
+        <input type="text" id="searchBar" placeholder="Search for dishes...">
+      </div>
+      <div class="action-icons">
+        <button type="button" id="viewWishlist"><i class="fas fa-heart"></i> View Wishlist</button>
+        <button type="button" id="viewCart"><i class="fas fa-shopping-cart"></i> View Cart</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filter Section -->
+  <section class="filters">
+    <button type="button" class="filter-btn" data-filter="all">All</button>
+    <button type="button" class="filter-btn" data-filter="maincourses">Main Courses</button>
+    <button type="button" class="filter-btn" data-filter="vegetarian">Vegetarian</button>
+    <button type="button" class="filter-btn" data-filter="appetizers">Appetizers</button>
+    <button type="button" class="filter-btn" data-filter="soups">Soups</button>
+    <button type="button" class="filter-btn" data-filter="salads">Salads</button>
+    <button type="button" class="filter-btn" data-filter="desserts">Desserts</button>
+  </section>
+
+  <main>
+    <!-- Menu Section -->
+    <div id="menu">
+      <script>
+        const categories = ["Main Courses", "Vegetarian", "Appetizers", "Soups", "Salads", "Desserts"];
+        const categoryDescriptions = ["Juicy chicken breast served with mashed potatoes", "Tender beef in creamy mushroom sauce with egg noodles", "Slow-roasted lamb served with mint jelly and vegetables", "Fresh salmon filet with lemon butter sauce", "Perfectly grilled steak served with roasted potatoes", "Chicken breasts in a Marsala wine mushroom sauce", "Fresh veggies in a savory soy-based sauce", "Sautéed shrimp with garlic butter and white wine sauce", "Juicy pork chops grilled to perfection", "Peppers filled with rice, meat, and vegetables" , "Layers of pasta, vegetables, and cheese", "Spiced chickpeas served with rice", "Bell peppers filled with quinoa and veggies", "A creamy, cheesy pasta dish with vegetables", "Plant-based patty with fresh toppings", "Tofu with stir-fried veggies and soy sauce", "Baked eggplant slices with marinara and cheese", "Spiralized zucchini tossed in pesto sauce", "Indian spiced paneer in a creamy tomato sauce", "Fresh veggies wrapped in sushi rice and seaweed" , "Crispy rolls stuffed with fresh vegetables and served with a tangy dip", "Freshly baked bread topped with garlic butter and parsley", "Juicy wings tossed in a choice of BBQ or spicy buffalo sauce", "Toasted baguette topped with fresh tomatoes, basil, and olive oil", "Golden-fried mozzarella served with marinara sauce", "Mushrooms filled with garlic cream cheese and baked to perfection", "Crispy golden onion rings served with a tangy dip", "Creamy dip served with tortilla chips", "Loaded potato halves topped with cheese, bacon, and sour cream", "Cherry tomatoes, mozzarella, and basil drizzled with balsamic glaze" , "Creamy tomato soup topped with fresh basil", "Classic soup with tender chicken, noodles, and vegetables", "Hearty Italian vegetable soup with beans and pasta", "Creamy soup with clams, potatoes, and herbs", "Topped with melted cheese and crispy bread", "Smooth and cheesy broccoli soup", "Healthy lentil soup with spices and vegetables", "Rich and creamy mushroom soup", "Tangy and spicy soup with coconut milk and chicken", "Light soup with sweet corn and spring onions" ,"Crisp romaine, croutons, and Parmesan tossed in Caesar dressing", "Mixed greens with olives, feta, cucumbers, and tomatoes", "Slices of mozzarella, tomatoes, and basil with olive oil", "Grilled chicken, avocado, bacon, and eggs on greens", "Fresh spinach with strawberries, almonds, and feta", "Protein-packed quinoa with veggies and lemon dressing", "Grilled chicken, cabbage, and sesame ginger dressing", "Rotini pasta with veggies and Italian dressing", "Kale, cranberries, and nuts with a citrus vinaigrette", "Mixed greens with cucumbers, tomatoes, and carrots","Italian dessert with coffee-soaked ladyfingers and mascarpone", "Warm chocolate cake with a gooey center", "Creamy cheesecake with a graham cracker crust", "Classic pie with cinnamon-spiced apples", "Chocolate brownie with ice cream and hot fudge", "Silky Italian dessert topped with berry sauce", "Creamy custard with a caramelized sugar top", "Pastry crust filled with custard and topped with fresh fruit", "Layers of banana, cream, and caramel in a biscuit base", "Three scoops of assorted premium ice cream" ];
+        const imageUrls = Array.from({ length: 60 }, (_, i) => `images/${i + 1}.jpg`);
+        const pricesList = ["$14.99", "$16.99", "$18.99", "$17.99", "$22.99", "$15.99", "$12.99", "$18.49", "$15.99", "$13.99" , "$14.99", "$16.99", "$18.99", "$17.99", "$22.99", "$15.99", "$12.99", "$18.49", "$15.99", "$13.99", "$14.99", "$16.99", "$18.99", "$17.99", "$22.99", "$15.99", "$12.99", "$18.49", "$15.99", "$13.99" , "$4.99", "$5.99", "$6.49", "$7.49", "$6.99", "$5.99", "$5.49", "$6.49", "$7.99", "$4.99" , "$8.99", "$9.49", "$8.99", "$10.99", "$9.49", "$10.49", "$11.49", "$8.99", "$9.99", "$7.99" , "$6.99", "$7.99", "$6.49", "$5.99", "$7.49", "$6.99", "$7.49", "$6.99", "$7.99", "$5.99"];
+        const dishNames = ["Grilled Chicken Breast", "Beef Stroganoff", "Roast Lamb", "Grilled Salmon", "Ribeye Steak", "Chicken Marsala", "Vegetable Stir-fry", "Shrimp Scampi", "Pork Chops", "Stuffed Bell Peppers" ,"Vegetable Lasagna", "Chickpea Curry", "Vegetarian", "Mushroom Risotto", "Vegetarian Burger", "Tofu Stir-fry", "Eggplant Parmesan", "Zucchini Noodles", "Paneer Tikka Masala", "Vegetable Sushi Rolls" , "Spring Rolls", "Garlic Bread", "Chicken Wings", "Bruschetta", "Mozzarella Sticks", "Stuffed Mushrooms", "Onion Rings", "Spinach Artichoke Dip", "Potato Skins", "Caprese Skewers" , "Tomato Basil Soup", "Chicken Noodle Soup", "Minestrone", "Clam Chowder", "French Onion Soup", "Broccoli Cheddar Soup", "Lentil Soup", "Cream of Mushroom Soup", "Thai Coconut Soup", "Sweet Corn Soup" , "Caesar Salad", "Greek Salad", "Caprese Salad", "Cobb Salad", "Spinach Salad", "Quinoa Salad", "Asian Chicken Salad", "Pasta Salad", "Kale Salad", "Garden Salad" , "Tiramisu", "Chocolate Lava Cake", "Cheesecake", "Apple Pie", "Brownie Sundae", "Panna Cotta", "Creme Brulee", "Fruit Tart", "Banoffee Pie", "Ice Cream Trio" ];
+        const filter = ["maincourses", "vegetarian", "appetizers", "soups", "salads", "desserts"];
+        const dishesPerCategory = 10;
+
+        const dishes = categories.map((category, i) => {
+          const categoryDishes = Array.from({ length: dishesPerCategory }, (_, dishIndex) => {
+            const dishId = i * dishesPerCategory + dishIndex;
+            return `
+              <div class="menu-item" data-type="${filter[i]}" data-id="${dishId}">
+                <img src="${imageUrls[dishId]}" alt="${dishNames[dishId]}">
+                <div class="item-description">
+                  <h3>${dishNames[dishId]} - <span class="price">${pricesList[dishId]}</span></h3>
+                  <p>${categoryDescriptions[dishId]}</p>
+                  <button type="button" class="add-to-wishlist"><i class="fas fa-heart"></i>&#10084;</button>
+                  <button type="button" class="add-to-cart">Add to Cart</button>
+                </div>
+              </div>`;
+          }).join('');
+          return `
+            <section class="menu-category" id="category-${i + 1}">
+              <h2>${category}</h2>
+              <div class="menu-items">
+                ${categoryDishes}
+              </div>
+            </section>`;
+        });
+
+        document.getElementById('menu').innerHTML = dishes.join('');
+      </script>
+    </div>
+  </main>
+
+  <!-- Wishlist Modal -->
+  <div id="wishlist-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeWishlist">×</span>
+      <h2>Wishlist</h2>
+      <ul id="wishlist-items"></ul>
+    </div>
+  </div>
+
+  <!-- Cart Modal -->
+  <div id="cart-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeCart">×</span>
+      <h2>Cart</h2>
+      <ul id="cart-items"></ul>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>© 2024 Restaurant Name | All Rights Reserved</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
