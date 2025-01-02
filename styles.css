@@ -120,7 +120,9 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
 .filters {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap; /* Enable wrapping to multiple rows */
+  justify-content: center; /* Center-align the buttons */
+  gap: 10px; /* Add spacing between buttons */
   margin: 20px 0;
 }
 
@@ -128,48 +130,35 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   background-color: #333;
   color: white;
   border: none;
-  padding: 10px 20px;
-  margin: 0 10px;
+  padding: 10px 20px; /* Adjust padding for consistent button size */
   cursor: pointer;
   border-radius: 5px;
+  font-size: 14px;
+  flex: 1 1 calc(20% - 10px); /* Ensure buttons adjust to fit evenly */
+  text-align: center;
+  transition: background-color 0.3s ease; /* Smooth hover effect */
 }
 
 .filter-btn:hover {
   background-color: #555;
 }
 
-@media (max-width: 710px) {
+/* Responsive Design */
+@media (max-width: 800px) {
   .filter-btn {
-    margin: 50px 15px;
-    padding: 7px 12px;
+    flex: 1 1 calc(33.33% - 10px); /* 3 buttons per row */
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 600px) {
   .filter-btn {
-    margin: 50px 13px;
-    padding: 7px 12px;
+    flex: 1 1 calc(50% - 10px); /* 2 buttons per row */
   }
 }
 
-@media (max-width: 630px) {
+@media (max-width: 400px) {
   .filter-btn {
-    margin: 50px 11px;
-    padding: 4px 6px;
-  }
-}
-
-@media (max-width: 610px) {
-  .filter-btn {
-    margin: 50px 10px;
-    padding: 4px 6px;
-  }
-}
-
-@media (max-width: 550px) {
-  .filter-btn {
-    margin: 50px 5px;
-    padding: 4px 6px;
+    flex: 1 1 100%; /* 1 button per row on very small screens */
   }
 }
 
