@@ -13,7 +13,7 @@
     <div class="header-container">
       <div class="logo">
         <a href="#" id="homeIcon">
-          <img src="images/home.png" alt="Home Icon" class="home-icon">Cuisine Fusion
+          <img src="https://via.placeholder.com/30" alt="Home Icon" class="home-icon"> Cuisine Fusion
         </a>
       </div>
       <div class="search-container">
@@ -22,6 +22,7 @@
       <div class="action-icons">
         <button type="button" id="viewWishlist"><i class="fas fa-heart"></i> View Wishlist</button>
         <button type="button" id="viewCart"><i class="fas fa-shopping-cart"></i> View Cart</button>
+        <button type="button" id="viewOrderHistory"><i class="fas fa-history"></i> Order History</button>
       </div>
     </div>
   </header>
@@ -94,6 +95,15 @@
       <ul id="cart-items"></ul>
     </div>
   </div>
+
+  <!-- Order History Modal -->
+<div id="order-history-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeOrderHistory">×</span>
+    <h2>Order History</h2>
+    <ul id="order-history-items"></ul>
+  </div>
+</div>
 
   <!-- Footer Section -->
   <footer>
