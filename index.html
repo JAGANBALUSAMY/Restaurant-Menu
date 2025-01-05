@@ -9,118 +9,128 @@
 </head>
 <body>
 
-  <!-- Header Section -->
-  <header>
-    <div class="header-container">
-      <div class="logo">
-        <a href="#" id="homeIcon">
-          <img src="https://via.placeholder.com/30" alt="Home Icon" class="home-icon"> Restaurant Name
-        </a>
-      </div>
-      <div class="search-container">
-        <input type="text" id="searchBar" placeholder="Search for dishes...">
-      </div>
-      <div class="action-icons">
-        <button type="button" id="viewWishlist"><i class="fas fa-heart"></i> View Wishlist</button>
-        <button type="button" id="viewCart"><i class="fas fa-shopping-cart"></i> View Cart</button>
-      </div>
+<!-- Header Section -->
+<header>
+  <div class="header-container">
+    <div class="logo">
+      <a href="#" id="homeIcon">
+        <img src="https://via.placeholder.com/30" alt="Home Icon" class="home-icon"> Restaurant Name
+      </a>
     </div>
-  </header>
-
-  <!-- Filter Section -->
-  <section class="filters">
-    <button type="button" class="filter-btn" data-filter="maincourses">Main Courses</button>
-    <button type="button" class="filter-btn" data-filter="vegetarian">Vegetarian</button>
-    <button type="button" class="filter-btn" data-filter="appetizers">Appetizers</button>
-    <button type="button" class="filter-btn" data-filter="soups">Soups</button>
-    <button type="button" class="filter-btn" data-filter="salads">Salads</button>
-    <button type="button" class="filter-btn" data-filter="desserts">Desserts</button>
-    <button type="button" class="filter-btn" data-filter="pasta">Pasta</button>
-    <button type="button" class="filter-btn" data-filter="pizza">Pizza</button>
-    <button type="button" class="filter-btn" data-filter="seafood">Seafood</button>
-    <button type="button" class="filter-btn" data-filter="grilled">Grilled</button>
-    <button type="button" class="filter-btn" data-filter="beverages">Beverages</button>
-    <button type="button" class="filter-btn" data-filter="kidsmenu">Kids Menu</button>
-    <button type="button" class="filter-btn" data-filter="breakfast">Breakfast</button>
-    <button type="button" class="filter-btn" data-filter="specials">Specials</button>
-    <button type="button" class="filter-btn" data-filter="sides">Sides</button>
-    <button type="button" class="filter-btn" data-filter="all">All</button>
-  </section>
-
-  <main>
-    <!-- Menu Section -->
-    <div id="menu">
-      <script>
-        const categories = [
-          "Main Courses", "Vegetarian", "Appetizers", "Soups", "Salads",
-          "Desserts", "Pasta", "Pizza", "Seafood", "Grilled",
-          "Beverages", "Kids Menu", "Breakfast", "Specials", "Sides"
-        ];
-        const categoryDescriptions = Array.from({ length: 150 }, (_, i) => `Description ${i + 1}`);
-        const imageUrls = Array.from({ length: 150 }, () => "https://via.placeholder.com/150");
-        const pricesList = Array.from({ length: 150 }, () => 5.99);
-        const dishNames = Array.from({ length: 150 }, (_, i) => `Dish ${i + 1}`);
-        const filter = [
-          "maincourses", "vegetarian", "appetizers", "soups", "salads",
-          "desserts", "pasta", "pizza", "seafood", "grilled",
-          "beverages", "kidsmenu", "breakfast", "specials", "sides"
-        ];
-        const dishesPerCategory = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
-
-        const dishes = categories.map((category, i) => {
-          return `
-            <section class="menu-category" id="category-${i + 1}">
-              <h2>${category}</h2>
-              <div class="menu-items">
-                ${Array.from({ length: dishesPerCategory[i] }, (_, dishIndex) => {
-                  const imageUrl = imageUrls[i * 10 + dishIndex];
-                  const price = pricesList[i * 10 + dishIndex];
-                  const dishName = dishNames[i * 10 + dishIndex];
-                  const categoryDescription = categoryDescriptions[i * 10 + dishIndex];
-
-                  return `
-                    <div class="menu-item" data-type="${filter[i]}" data-id="${i}-${dishIndex}">
-                      <img src="${imageUrl}" alt="${dishName}">
-                      <div class="item-description">
-                        <h3>${dishName} - <span class="price">$${price.toFixed(2)}</span></h3>
-                        <p>${categoryDescription}</p>
-                        <button type="button" class="add-to-wishlist"><i class="fas fa-heart"></i> &#10084;</button>
-                        <button type="button" class="add-to-cart">Add to Cart</button>
-                      </div>
-                    </div>`;
-                }).join('')}
-              </div>
-            </section>`;
-        });
-
-        document.getElementById('menu').innerHTML = dishes.join('');
-      </script>
+    <div class="search-container">
+      <input type="text" id="searchBar" placeholder="Search for dishes...">
     </div>
-  </main>
-
-  <!-- Wishlist Modal -->
-  <div id="wishlist-modal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" id="closeWishlist">×</span>
-      <h2>Wishlist</h2>
-      <ul id="wishlist-items"></ul>
+    <div class="action-icons">
+      <button type="button" id="viewWishlist"><i class="fas fa-heart"></i> View Wishlist</button>
+      <button type="button" id="viewCart"><i class="fas fa-shopping-cart"></i> View Cart</button>
+      <button type="button" id="viewOrderHistory"><i class="fas fa-history"></i> Order History</button>
     </div>
   </div>
+</header>
 
-  <!-- Cart Modal -->
-  <div id="cart-modal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" id="closeCart">×</span>
-      <h2>Cart</h2>
-      <ul id="cart-items"></ul>
-    </div>
+<!-- Filter Section -->
+<section class="filters">
+  <button type="button" class="filter-btn" data-filter="maincourses">Main Courses</button>
+  <button type="button" class="filter-btn" data-filter="vegetarian">Vegetarian</button>
+  <button type="button" class="filter-btn" data-filter="appetizers">Appetizers</button>
+  <button type="button" class="filter-btn" data-filter="soups">Soups</button>
+  <button type="button" class="filter-btn" data-filter="salads">Salads</button>
+  <button type="button" class="filter-btn" data-filter="desserts">Desserts</button>
+  <button type="button" class="filter-btn" data-filter="pasta">Pasta</button>
+  <button type="button" class="filter-btn" data-filter="pizza">Pizza</button>
+  <button type="button" class="filter-btn" data-filter="seafood">Seafood</button>
+  <button type="button" class="filter-btn" data-filter="grilled">Grilled</button>
+  <button type="button" class="filter-btn" data-filter="beverages">Beverages</button>
+  <button type="button" class="filter-btn" data-filter="kidsmenu">Kids Menu</button>
+  <button type="button" class="filter-btn" data-filter="breakfast">Breakfast</button>
+  <button type="button" class="filter-btn" data-filter="specials">Specials</button>
+  <button type="button" class="filter-btn" data-filter="sides">Sides</button>
+  <button type="button" class="filter-btn" data-filter="all">All</button>
+</section>
+
+<main>
+  <!-- Menu Section -->
+  <div id="menu">
+    <script>
+      const categories = [
+        "Main Courses", "Vegetarian", "Appetizers", "Soups", "Salads",
+        "Desserts", "Pasta", "Pizza", "Seafood", "Grilled",
+        "Beverages", "Kids Menu", "Breakfast", "Specials", "Sides"
+      ];
+      const categoryDescriptions = Array.from({ length: 150 }, (_, i) => `Description ${i + 1}`);
+      const imageUrls = Array.from({ length: 150 }, () => "https://via.placeholder.com/150");
+      const pricesList = Array.from({ length: 150 }, () => 5.99);
+      const dishNames = Array.from({ length: 150 }, (_, i) => `Dish ${i + 1}`);
+      const filter = [
+        "maincourses", "vegetarian", "appetizers", "soups", "salads",
+        "desserts", "pasta", "pizza", "seafood", "grilled",
+        "beverages", "kidsmenu", "breakfast", "specials", "sides"
+      ];
+      const dishesPerCategory = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10];
+
+      const dishes = categories.map((category, i) => {
+        return `
+          <section class="menu-category" id="category-${i + 1}">
+            <h2>${category}</h2>
+            <div class="menu-items">
+              ${Array.from({ length: dishesPerCategory[i] }, (_, dishIndex) => {
+                const imageUrl = imageUrls[i * 10 + dishIndex];
+                const price = pricesList[i * 10 + dishIndex];
+                const dishName = dishNames[i * 10 + dishIndex];
+                const categoryDescription = categoryDescriptions[i * 10 + dishIndex];
+
+                return `
+                  <div class="menu-item" data-type="${filter[i]}" data-id="${i}-${dishIndex}">
+                    <img src="${imageUrl}" alt="${dishName}">
+                    <div class="item-description">
+                      <h3>${dishName} - <span class="price">$${price.toFixed(2)}</span></h3>
+                      <p>${categoryDescription}</p>
+                      <button type="button" class="add-to-wishlist"><i class="fas fa-heart"></i> &#10084;</button>
+                      <button type="button" class="add-to-cart">Add to Cart</button>
+                    </div>
+                  </div>`;
+              }).join('')}
+            </div>
+          </section>`;
+      });
+
+      document.getElementById('menu').innerHTML = dishes.join('');
+    </script>
   </div>
+</main>
 
-  <!-- Footer Section -->
-  <footer>
-    <p>© 2024 Restaurant Name | All Rights Reserved</p>
-  </footer>
+<!-- Wishlist Modal -->
+<div id="wishlist-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeWishlist">×</span>
+    <h2>Wishlist</h2>
+    <ul id="wishlist-items"></ul>
+  </div>
+</div>
 
-  <script src="script.js"></script>
+<!-- Cart Modal -->
+<div id="cart-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeCart">×</span>
+    <h2>Cart</h2>
+    <ul id="cart-items"></ul>
+  </div>
+</div>
+
+<!-- Order History Modal -->
+<div id="order-history-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeOrderHistory">×</span>
+    <h2>Order History</h2>
+    <ul id="order-history-items"></ul>
+  </div>
+</div>
+
+<!-- Footer Section -->
+<footer>
+  <p>© 2024 Restaurant Name | All Rights Reserved</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
